@@ -3,27 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NVIDIA | Login</title>
+    <title>Nvidia | Login</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <div class="container">
-        <div class="form-box">
-            <h1>Login</h1>
-            <form>
-                <div class="input-group">
-                    <div class="input-field">
-                        <input type="email" placeholder="Email" required>
-                    </div>
-                    <div class="input-field">
-                        <input type="password" placeholder="Password" required>
-                    </div>
-                </div>
-                <button type="submit" class="btn">Login</button>
-                <p>Don't have an account? <a href="signup">Sign Up</a></p>
-            </form>
-        </div>
+        <h2>Login</h2>
+        <input type="email" placeholder="Email" id="email">
+        <input type="password" placeholder="Password" id="password">
+        <button onclick="login()">Login</button>
+        <p>Don't have an account? <a href="#">Sign Up</a></p>
     </div>
-    <script src="js/script.js"></script>
+
+    <footer>
+        &copy; 2025 StudyHelper. All rights reserved.
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
