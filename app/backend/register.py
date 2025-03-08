@@ -1,60 +1,35 @@
-import numpy as np
+import sys
 import pandas as pd
-data = pd.read_csv("login.csv")
-info = data.to_dict(orient='records')
+
+# Load user data from CSV
+csv_file = "backend/login.csv"  # Ensure this file exists
+try:
+    data = pd.read_csv(csv_file)
+except FileNotFoundError:
+    data = pd.DataFrame(columns=["user", "password"])
+
 def username_exists(username):
-    for user in info:
-        if 'user' in user and user['user'] == username:
-            return True
-    return False
+    return username in data["user"].values
 
-def home():
-    print("Hello,", n)
-    print("------MENU------")
-    print(" 1. Register","\n","2. Login","\n","3. Exit")
-    ch = int(input("Enter choice:"))
-    if ch==1:
-        register()
-    elif ch==2:
-        login()
+def check_credentials(username, password):
+    user_data = data[(data["user"] == username) & (data["password"] == password)]
+    return not user_data.empty
+
+def register_user(username, password):
+    global data
+    new_user = pd.DataFrame([{"user": username, "password": password}])
+    data = pd.concat([data, new_user], ignore_index=True)
+    data.to_csv(csv_file, index=False)
+
+if __name__ == "__main__":
+    if len(sys.argv) < 3:
+        print("Failure: Missing username or password")
+        sys.exit(1)
+
+    username = sys.argv[1]
+    password = sys.argv[2]
+
+    if check_credentials(username, password):
+        print("Success")
     else:
-        exit()
-
-def register():
-    print("Please register yourself.")
-    user=input("Create a username:")
-    if username_exists(user):
-        print("Username already taken.")
-        register()
-    else:
-        password=input("Create your password:")
-        new={"user":user,"password":password}
-        info.append(new)
-        # Updating the DataFrame
-        df = pd.DataFrame(info)
-        df.to_csv('login.csv', index=False)
-        print("Registered successfully")
-        home()
-
-def login():
-    print("LOGIN")
-    user=input("Enter your username:")
-    for existing in info:
-        if 'user' in existing and existing['user'] == user:
-            password=input("Enter your password:")
-            if password == existing['password']:
-                print("Login successful.")
-                home()
-            else:
-                print("Incorrect password.")
-                login()
-            return
-    print("You haven't registered.")
-    register()
-
-
-
-n=(input("Please enter your name:"))
-while True:
-    home()
-
+        print("Failure: Invalid credentials")
