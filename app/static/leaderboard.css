@@ -1,0 +1,55 @@
+/* Leaderboard Table */
+.leaderboard-container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.dark-mode .leaderboard-container {
+    background: #252525;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+h2 {
+    margin-bottom: 15px;
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 2px solid #ddd;
+}
+
+th {
+    background: #0073e6;
+    color: white;
+}
+
+.dark-mode th {
+    background: #005bb5;
+}
+
+tr:nth-child(even) {
+    background: #f4f4f4;
+}
+
+.dark-mode tr:nth-child(even) {
+    background: #333;
+}
+
+tr:hover {
+    background: #e8f0ff;
+}
+
+.dark-mode tr:hover {
+    background: #444;
+}
