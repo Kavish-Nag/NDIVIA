@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>World War 1 Quiz</title>
+    <style>
+        /* Default Light Mode Styles */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f9f9f9;
+            color: #333;
+            transition: background 0.3s, color 0.3s;
+        }
+        .dark-mode {
+            background-color: #121212;
+            color: #ffffff;
+        }
+        .container {
+            width: 50%;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            transition: background 0.3s;
+        }
+        .dark-mode .container {
+            background: #1e1e1e;
+        }
+        .question {
+            margin-bottom: 10px;
+            text-align: left;
+        }
+        .timer {
+            font-size: 20px;
+            color: red;
+            font-weight: bold;
+        }
+        button {
+            background-color: #008CBA;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #005f73;
+        }
+        .theme-toggle {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            padding: 10px;
+            border: none;
+            background-color: #005f73;
+            color: white;
+            border-radius: 5px;
+        }
+        .theme-toggle:hover {
+            background-color: #003f50;
+        }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" onclick="toggleTheme()">Toggle Dark Mode</button>
+    <h1>World War 1 Quiz</h1>
+    <div class="timer">Time Left: <span id="time">60</span> seconds</div>
+    <div class="container">
+        <form id="quizForm">
+            <div class="question">
+                <p>1. When did World War 1 begin?</p>
+                <input type="radio" name="q1" value="0"> 1912 <br>
+                <input type="radio" name="q1" value="10"> 1914 <br>
+                <input type="radio" name="q1" value="0"> 1916 <br>
+            </div>
+            <div class="question">
+                <p>2. Which event triggered World War 1?</p>
+                <input type="radio" name="q2" value="0"> The sinking of Titanic <br>
+                <input type="radio" name="q2" value="0"> Treaty of Versailles <br>
+                <input type="radio" name="q2" value="10"> Assassination of Archduke Franz Ferdinand <br>
+            </div>
+            <div class="question">
+                <p>3. Which countries were part of the Triple Entente?</p>
+                <input type="radio" name="q3" value="10"> France, Russia, UK <br>
+                <input type="radio" name="q3" value="0"> Germany, Italy, Austria-Hungary <br>
+                <input type="radio" name="q3" value="0"> USA, France, Germany <br>
+            </div>
+            <div class="question">
+                <p>4. What was the primary form of warfare in WW1?</p>
+                <input type="radio" name="q4" value="10"> Trench Warfare <br>
+                <input type="radio" name="q4" value="0"> Guerrilla Warfare <br>
+                <input type="radio" name="q4" value="0"> Nuclear Warfare <br>
+            </div>
+            <div class="question">
+                <p>5. When did World War 1 end?</p>
+                <input type="radio" name="q5" value="0"> 1917 <br>
+                <input type="radio" name="q5" value="10"> 1918 <br>
+                <input type="radio" name="q5" value="0"> 1920 <br>
+            </div>
+            <button type="button" onclick="calculateScore()">Submit</button>
+        </form>
+        <h2 id="result"></h2>
+    </div>
+    <script>
+        let timeLeft = 60;
+        const timer = setInterval(() => {
+            if (timeLeft <= 0) {
+                clearInterval(timer);
+                calculateScore();
+            }
+            document.getElementById('time').textContent = timeLeft;
+            timeLeft--;
+        }, 1000);
+
+        function calculateScore() {
+            let score = 0;
+            const form = document.getElementById('quizForm');
+            const answers = new FormData(form);
+            for (let entry of answers.values()) {
+                score += parseInt(entry);
+            }
+            document.getElementById('result').textContent = 'Your Score: ' + score + '/100';
+            clearInterval(timer);
+        }
+
+        function toggleTheme() {
+            document.body.classList.toggle("dark-mode");
+            localStorage.setItem("darkMode", document.body.classList.contains("dark-mode"));
+        }
+        (function() {
+            if (localStorage.getItem("darkMode") === "true") {
+                document.body.classList.add("dark-mode");
+            }
+        })();
+    </script>
+</body>
+</html>
