@@ -3,27 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up</title>
-   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Sign Up | Ndivia</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <div class="container">
-        <div class="form-box">
-            <h1>Sign Up</h1>
-            <form action="login.html">
-                <div class="input-field">
-                    <input type="text" placeholder="Full Name" required>
-                </div>
-                <div class="input-field">
-                    <input type="email" placeholder="Email" required>
-                </div>
-                <div class="input-field">
-                    <input type="password" placeholder="Password" required>
-                </div>
-                <button type="submit" class="btn">Sign Up</button>
-                <p>Already have an account? <a href="/">Login</a></p>
-            </form>
-        </div>
+        <h2>Sign Up</h2>
+        <input type="text" placeholder="Username" id="newUsername">
+        <input type="email" placeholder="Email" id="newEmail">
+        <input type="password" placeholder="Password" id="newPassword">
+        <button onclick="signup()">Sign Up</button>
+        <p>Already have an account? <a href="login.html">Login</a></p>
     </div>
+
+    <script>
+        function signup() {
+            let username = document.getElementById("newUsername").value;
+            let email = document.getElementById("newEmail").value;
+            let password = document.getElementById("newPassword").value;
+
+            localStorage.setItem("username", username);
+            localStorage.setItem("email", email);
+            localStorage.setItem("password", password);
+
+            alert("Sign Up Successful! Please Login.");
+            window.location.href = "login.html";
+        }
+    </script>
 </body>
 </html>
