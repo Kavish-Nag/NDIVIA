@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel | Ndivia</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            background-color: #f4f4f4;
+            color: #333;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        body.dark-mode {
+            background-color: #121212;
+            color: white;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark-mode .container {
+            background: #222;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        #darkModeToggle {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <button id="darkModeToggle">🌙</button>
+    <div class="container">
+        <h2>Admin Panel</h2>
+        <h3>Add New Quiz Question</h3>
+
+        <form id="questionForm">
+            <label>Question:</label>
+            <input type="text" id="question" required>
+
+            <label>Option 1:</label>
+            <input type="text" id="option1" required>
+
+            <label>Option 2:</label>
+            <input type="text" id="option2" required>
+
+            <label>Option 3:</label>
+            <input type="text" id="option3" required>
+
+            <label>Option 4:</label>
+            <input type="text" id="option4" required>
+
+            <label>Correct Answer:</label>
+            <select id="correctAnswer" required>
+                <option value="1">Option 1</option>
+                <option value="2">Option 2</option>
+                <option value="3">Option 3</option>
+                <option value="4">Option 4</option>
+            </select>
+
+            <button type="button" onclick="saveQuestion()">Save Question</button>
+        </form>
+
+        <h3>Navigation</h3>
+        <button onclick="window.location.href='index.html'">🏠 Home</button>
+        <button onclick="window.location.href='help.html'">❓ Help</button>
+        <button onclick="logout()">🚪 Logout</button>
+    </div>
+
+    <script>
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        darkModeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            darkModeToggle.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+        });
+
+        function saveQuestion() {
+            let question = document.getElementById('question').value;
+            let options = [
+                document.getElementById('option1').value,
+                document.getElementById('option2').value,
+                document.getElementById('option3').value,
+                document.getElementById('option4').value
+            ];
+            let correctAnswer = document.getElementById('correctAnswer').value;
+
+            if (question && options.every(opt => opt.trim() !== "") && correctAnswer) {
+                alert("Question saved successfully!");
+                document.getElementById('questionForm').reset();
+            } else {
+                alert("Please fill in all fields.");
+            }
+        }
+
+        function logout() {
+            alert("Logged out!");
+            window.location.href = "login.html";
+        }
+    </script>
+</body>
+</html>
