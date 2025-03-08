@@ -28,5 +28,13 @@ def login():
 def index():
     return render_template("index.html")
 
+@app.route("/revise")
+def revise():
+    return render_template("revise.html")
+
+@app.route("/help")
+def help():
+    return render_template("help.html")
+
 if __name__ == "__main__":
     app.run(host="127.0.0.1", port=5000, debug=True)
