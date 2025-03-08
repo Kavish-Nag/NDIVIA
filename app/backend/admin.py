@@ -1,5 +1,4 @@
 import pandas as pd
-
 ques = pd.read_csv("questions.csv", header=None).values.tolist()
 ans = pd.read_csv("answers.csv", header=None).values.tolist()
 admin_info = pd.read_csv("admin_info.csv")
@@ -41,11 +40,9 @@ def login():
 def save_questions(ques):
     df = pd.DataFrame(ques)
     df.to_csv("questions.csv", header=False, index=False)
-
 def save_answers(ans):
     df = pd.DataFrame(ans)
     df.to_csv("answers.csv", header=False, index=False)
-
 def modify():
     while True:
         print("\nAdmin Panel:")
@@ -56,13 +53,7 @@ def modify():
         print("5. View Answer Key")
         print("6. Modify Answer")
         print("7. Logout")
-
-        try:
-            ch = int(input("Enter your choice: "))
-        except ValueError:
-            print("Invalid input. Please enter a number.")
-            continue
-
+        ch = int(input("Enter your choice: "))
         if ch == 1:
             display_questions()
         elif ch == 2:
