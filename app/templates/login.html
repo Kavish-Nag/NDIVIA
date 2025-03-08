@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nvidia | Login</title>
+    <title>Login | Ndivia</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
@@ -12,13 +12,36 @@
         <input type="email" placeholder="Email" id="email">
         <input type="password" placeholder="Password" id="password">
         <button onclick="login()">Login</button>
-        <p>Don't have an account? <a href="signup">Sign Up</a></p>
+        <p>Don't have an account? <a href="signup.html">Sign Up</a></p>
     </div>
 
-    <footer>
-        &copy; 2025 StudyHelper. All rights reserved.
-    </footer>
+    <script>
+        function login() {
+            let email = document.getElementById("email").value;
+            let password = document.getElementById("password").value;
+            let storedEmail = localStorage.getItem("email");
+            let storedPassword = localStorage.getItem("password");
 
-    <script src="script.js"></script>
+            if (email === storedEmail && password === storedPassword) {
+                alert("Login Successful!");
+                window.location.href = "index.html";
+            } else {
+                alert("Invalid Credentials");
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const darkModeToggle = document.getElementById("darkModeToggle");
+
+            if (localStorage.getItem("darkMode") === "enabled") {
+                document.body.classList.add("dark-mode");
+            }
+
+            darkModeToggle.addEventListener("click", function () {
+                document.body.classList.toggle("dark-mode");
+                localStorage.setItem("darkMode", document.body.classList.contains("dark-mode") ? "enabled" : "disabled");
+            });
+        });
+    </script>
 </body>
 </html>
