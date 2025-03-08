@@ -3,31 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - Interactive Study</title>
+    <title>Ndivia | Home</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <nav>
-        <div class="logo">Nvidia</div>
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="revise.html">Revise</a></li>
-            <li><a href="help.html">Help</a></li>
-            <li><a href="login.html">Login</a></li>
-        </ul>
-    </nav>
+    <header>
+        <h1>Ndivia</h1>
+        <button id="darkModeToggle">🌙</button>
+    </header>
 
-    <div class="home-container">
-        <h1>Welcome to StudyHelper</h1>
-        <p>Your AI-powered study companion for better revision.</p>
-        <a href="revise.html" class="start-btn">Start Revising</a>
+    <div class="container">
+        <h2>Welcome to Ndivia</h2>
+        <p>Your ultimate platform for interactive learning, quizzes, and revision.</p>
+
+        <div class="buttons">
+            <a href="quiz.html"><button>Take Quiz</button></a>
+            <a href="revise.html"><button>Revise PDF</button></a>
+            <a href="leaderboard.html"><button>Leaderboard</button></a>
+            <a href="login.html"><button>Logout</button></a>
+        </div>
+
+        <section class="how-it-works">
+            <h3>How It Works</h3>
+            <ul>
+                <li>📚 <strong>Revise:</strong> Upload PDFs, and our AI generates key points for quick review.</li>
+                <li>🎯 <strong>Take Quizzes:</strong> Test your knowledge with interactive quizzes.</li>
+                <li>🏆 <strong>Leaderboard:</strong> Compete with others and track your progress.</li>
+            </ul>
+        </section>
+
+        <section class="features">
+            <h3>Why Use Ndivia?</h3>
+            <div class="feature-box">
+                <div class="feature">
+                    <h4>🚀 Interactive Learning</h4>
+                    <p>Engage with quizzes and AI-powered revision tools.</p>
+                </div>
+                <div class="feature">
+                    <h4>🔍 Smart Revision</h4>
+                    <p>Summarize your study material efficiently with AI.</p>
+                </div>
+                <div class="feature">
+                    <h4>🌙 Dark Mode</h4>
+                    <p>Toggle dark mode for comfortable late-night studying.</p>
+                </div>
+            </div>
+        </section>
     </div>
 
     <footer>
-        &copy; 2025 StudyHelper. All rights reserved.
+        <p>© 2025 Ndivia. All rights reserved.</p>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const darkModeToggle = document.getElementById("darkModeToggle");
+
+            if (localStorage.getItem("darkMode") === "enabled") {
+                document.body.classList.add("dark-mode");
+            }
+
+            darkModeToggle.addEventListener("click", function () {
+                document.body.classList.toggle("dark-mode");
+                localStorage.setItem("darkMode", document.body.classList.contains("dark-mode") ? "enabled" : "disabled");
+            });
+        });
+    </script>
 </body>
 </html>
-8
